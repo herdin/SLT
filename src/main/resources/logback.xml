@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+configuration file for LogBack (slf4J implementation)
+See here for more details : http://gordondickens.com/wordpress/2013/03/27/sawing-through-the-java-loggers/
+See here for layout       : https://logback.qos.ch/manual/layouts.html
+
+As of version 1.0.5, PatternLayout recognizes "%black", "%red", "%green","%yellow","%blue", "%magenta","%cyan", "%white", "%gray", "%boldRed","%boldGreen", "%boldYellow", "%boldBlue", "%boldMagenta""%boldCyan", "%boldWhite" and "%highlight" as conversion words.
+%d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%-5level)[%thread{10}] %-100(%blue(%logger{0}).%green(%method)) : %msg%n
+%d{pattern} : date
+
+-->
+<configuration scan="true" scanPeriod="30 seconds">
+    <timestamp key="bySecond" datePattern="yyyyMMdd'_'HHmmss"/>
+	<property name="PROJECT_PATH" value="C:\\noneedinstall\\sts-bundle\\workspace\\TemplateProject" />
+	<property name="DEFAULT_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%-5level)[%thread{10}] %blue(%logger{0}).%green(%method) : %msg%n" />
+	<property name="DEFAULT_PATTERN1" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%-5level)[%thread{10}] %blue(%logger{0}).%green(%method) : %msg%n" />
+	<property name="FILE_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level[%thread{10}] %logger{0}.%method : %msg%n" />
+
+    <appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${DEFAULT_PATTERN}</pattern>
+        </encoder>
+    </appender>
+	
+	<!-- 파일로 로그를 남김 -->
+	<appender name="fileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${PROJECT_PATH}/logs/log_${bySecond}.log</file>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>
+				<pattern>${FILE_PATTERN}</pattern>
+			</Pattern>
+		</encoder>
+	
+		<!-- 로그를 남기는 파일의 용량이 10KB가 넘으면 이를 압축 파일로 만들고 새로 로그 파일로 만들라는 정책 -->
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>1000KB</MaxFileSize>
+		</triggeringPolicy>
+	
+		<!-- 파일을 덮어쓰는 정책 -->
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<FileNamePattern>${PROJECT_PATH}/logs/log_${bySecond}.%i.log.zip</FileNamePattern>
+			<!-- MinIndex가 1이고, MaxIndex가 10이므로, 위의 파일 이름 패턴에 따라 아래의 로그 파일이 생길 것이다. 
+				logexample2.1.log.zip logexample2.2.log.zip .... logexample2.10.log.zip 이 
+				상태에서 또 10KB가 넘으면 logexample2.1.log.zip이 된다. -->
+			<MinIndex>1</MinIndex>
+			<MaxIndex>10</MaxIndex>
+		</rollingPolicy>
+	</appender>
+	
+
+	<!-- logger name="jdbc" level="OFF"/>
+	<logger name="jdbc.sqlonly" level="OFF"/>
+	<logger name="jdbc.sqltiming" level="DEBUG"/>
+	<logger name="jdbc.audit" level="OFF"/>
+	<logger name="jdbc.resultset" level="OFF"/>
+	<logger name="jdbc.resultsettable" level="DEBUG"/>
+	<logger name="jdbc.connection" level="OFF"/-->
+
+    <root level="DEBUG">
+        <appender-ref ref="consoleAppender"/>
+        <!-- appender-ref ref="fileAppender"/-->
+    </root>
+</configuration>
