@@ -15,10 +15,10 @@ public class TestDao {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
-	private SqlSessionTemplate sqlSession;
+	private SqlSessionTemplate sqlSessionTemplate;
 	
 	public TestVO testDao() {
-		return sqlSession.selectOne("dbtemplate.getTime");
+		return sqlSessionTemplate.selectOne("dbtemplate.getTime");
 	}//END OF FUNCTION
 	
 }//END OF CLASS

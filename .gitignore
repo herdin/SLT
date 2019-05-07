@@ -1,4 +1,4 @@
-**/*.properties
+**/*database.properties
 .classpath
 .project
 .settings/

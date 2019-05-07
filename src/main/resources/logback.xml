@@ -10,11 +10,11 @@ As of version 1.0.5, PatternLayout recognizes "%black", "%red", "%green","%yello
 
 -->
 <configuration scan="true" scanPeriod="30 seconds">
+	<property name="PROJECT_PATH" value="C:\\SLT\\workspace\\SLT" />
     <timestamp key="bySecond" datePattern="yyyyMMdd'_'HHmmss"/>
-	<property name="PROJECT_PATH" value="C:\\noneedinstall\\sts-bundle\\workspace\\TemplateProject" />
-	<property name="DEFAULT_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%-5level)[%thread{10}] %blue(%logger{0}).%green(%method) : %msg%n" />
-	<property name="DEFAULT_PATTERN1" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%-5level)[%thread{10}] %blue(%logger{0}).%green(%method) : %msg%n" />
-	<property name="FILE_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level[%thread{10}] %logger{0}.%method : %msg%n" />
+	<property name="DEFAULT_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%-5level) [%thread{10}] %blue(%logger{0}).%green(%method) : %msg%n" />
+	<property name="DEFAULT_PATTERN1" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%-5level) [%thread{10}] %blue(%logger{0}).%green(%method) : %msg%n" />
+	<property name="FILE_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread{10}] %logger{0}.%method : %msg%n" />
 
     <appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>

@@ -13,8 +13,7 @@
 		http://www.springframework.org/schema/context
 		http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <!-- mvc:annotation-driven /-->
-    <context:component-scan base-package="controller, service, dao"/>
+    <context:component-scan base-package="controller"/>
     <mvc:resources mapping="/resources/**" location="/resources/" />
     <mvc:annotation-driven />
 
