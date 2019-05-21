@@ -10,5 +10,6 @@
 	
 	<typeAliases>
 		<typeAlias alias="TestVO" type="vo.TestVO"></typeAlias>
+		<typeAlias alias="TestUser" type="vo.TestUser"></typeAlias>
 	</typeAliases>
 </configuration>

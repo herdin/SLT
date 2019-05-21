@@ -9,9 +9,9 @@ import dao.TestDao;
 import vo.TestVO;
 
 @Service
-public class TestServices {
+public class TestCrudServices {
 	
-	private Logger logger = LoggerFactory.getLogger(TestServices.class);
+	private Logger logger = LoggerFactory.getLogger(TestCrudServices.class);
 	
 	@Autowired
 	private TestDao testDao;

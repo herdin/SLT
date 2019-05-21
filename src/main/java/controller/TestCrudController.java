@@ -18,17 +18,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import service.TestServices;
+import service.TestCrudServices;
 import util.CommonUtils;
 
 @Controller
-@RequestMapping(value="/test")
-public class TestController {
+@RequestMapping(value="/noauth/crud")
+public class TestCrudController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(TestController.class);
+	private static final Logger logger = LoggerFactory.getLogger(TestCrudController.class);
 	
 	@Autowired
-	private TestServices testServices;
+	private TestCrudServices testServices;
 	
 	@Autowired
 	private MessageSource messageSource;

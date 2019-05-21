@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans:beans
+	xmlns="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/security
+		http://www.springframework.org/schema/security/spring-security.xsd
+">
+
+	<!--user-service>
+		<user name="lokesh" password="password" authorities="ROLE_USER" />
+		<user name="admin"  password="password" authorities="ROLE_USER,ROLE_ADMIN" />
+	</user-service-->
+
+    <http auto-config="true" use-expressions="true">
+		<intercept-url pattern="/auth/loginForm" access="permitAll" />
+		<intercept-url pattern="/auth/login" access="permitAll" />
+		<intercept-url pattern="/auth/logout" access="permitAll" />
+		<intercept-url pattern="/resources/**" access="permitAll" />
+		<intercept-url pattern="/noauth/**" access="permitAll" />
+		<intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
+		<!--form-login/>
+		<logout/-->
+		<form-login
+			username-parameter="id"
+			password-parameter="password"
+			login-page="/auth/loginForm"
+			login-processing-url="/auth/login"
+			default-target-url="/auth/main"
+			authentication-failure-url="/auth/loginForm?error"
+			always-use-default-target="true"
+		/>
+		<logout logout-url="/auth/logout" logout-success-url="/auth/loginForm?logout" invalidate-session="true" />
+		<csrf/>
+	</http>
+ 
+	<authentication-manager alias="authenticationManager">
+		<authentication-provider user-service-ref="testLoginService">
+			<password-encoder ref="testPasswordEncoderService"></password-encoder>
+		</authentication-provider>
+        <!--authentication-provider>
+            <user-service>
+                <user name="herdindefault" password="1234" authorities="ROLE_USER" />
+            </user-service>
+        </authentication-provider-->
+    </authentication-manager>
+	
+</beans:beans>

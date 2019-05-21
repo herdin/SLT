@@ -18,7 +18,7 @@ public class TestDao {
 	private SqlSessionTemplate sqlSessionTemplate;
 	
 	public TestVO testDao() {
-		return sqlSessionTemplate.selectOne("dbtemplate.getTime");
+		return sqlSessionTemplate.selectOne("testUser.getTime");
 	}//END OF FUNCTION
 	
 }//END OF CLASS

@@ -3,8 +3,16 @@
       PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
    
-<mapper namespace="dbtemplate">
+<mapper namespace="testUser">
 	<select id="getTime" resultType="TestVO">
 		SELECT DATE_FORMAT(NOW(), '%Y%m%d%H%i%s') AS CURRENT_DATETIME
+	</select>
+	<select id="get" resultType="TestUser" parameterType="TestUser">
+		SELECT
+			USERNAME
+			,PASSWORD
+		FROM TEST_USER
+		WHERE 1=1
+		AND USERNAME = #{username}
 	</select>
 </mapper>

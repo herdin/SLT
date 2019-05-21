@@ -1,4 +1,10 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://maven.apache.org/POM/4.0.0
+		http://maven.apache.org/xsd/maven-4.0.0.xsd
+">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.springframework.samples.service.service</groupId>
   <artifactId>SLT</artifactId>
@@ -12,14 +18,18 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		
 		<!-- Spring MVC -->
-		<spring-framework.version>4.3.16.RELEASE</spring-framework.version>
+		<!-- Old : 4.3.16.RELEASE -->
+		<!-- Old : 4.3.23.RELEASE -->
+		<spring-framework.version>5.1.7.RELEASE</spring-framework.version>
 		<!-- Other Web dependencies -->
 		<servlet.version>2.5</servlet.version>
 		<jsp.version>2.2</jsp.version>
 		<jstl.version>1.2</jstl.version>
+		<!-- Spring Security -->
+		<spring-security.version>4.2.12.RELEASE</spring-security.version>
 		<!-- Logging -->
-		<slf4j.version>1.7.5</slf4j.version>
-		<logback.version>1.0.13</logback.version>
+		<slf4j.version>1.7.4</slf4j.version>
+		<logback.version>1.2.3</logback.version>
 		<jcloverslf4j.version>1.7.6</jcloverslf4j.version>
 		<!-- Test -->
 		<junit.version>4.12</junit.version>
@@ -71,6 +81,7 @@
 			<version>${logback.version}</version>
 			<scope>runtime</scope>
 		</dependency>
+		<!-- java commonn logger over slf4j -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>jcl-over-slf4j</artifactId>
@@ -160,8 +171,46 @@
 		    <artifactId>netty-all</artifactId>
 		    <version>4.1.32.Final</version>
 		</dependency>
+		
+		<!-- Spring Security -->
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-core</artifactId>
+		    <version>${spring-security.version}</version>
+		    <type>jar</type>
+		    <scope>compile</scope>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-web</artifactId>
+		    <version>${spring-security.version}</version>
+		    <type>jar</type>
+		    <scope>compile</scope>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-config</artifactId>
+		    <version>${spring-security.version}</version>
+		    <type>jar</type>
+		    <scope>compile</scope>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-taglibs</artifactId>
+		    <version>${spring-security.version}</version>
+		    <type>jar</type>
+		    <scope>compile</scope>
+		</dependency>
+		
+		<!-- Spring Vault -->
+		<dependency>
+			<groupId>org.springframework.vault</groupId>
+			<artifactId>spring-vault-core</artifactId>
+			<version>2.1.2.RELEASE</version>
+		</dependency>
 
 	</dependencies>
+	
     <build>
         <!-- ROOT.war 가 생성된다. -->
         <finalName>SLT</finalName>
