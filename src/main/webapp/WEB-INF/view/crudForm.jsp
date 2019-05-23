@@ -29,7 +29,6 @@ $(document).ready(function(){
 			<!--c:url var="loginProcess" value="j_spring_security_check"/-->
 			<!-- j_spring_security_check -->
 			<form action="login" method="post" accept-charset="UTF-8">
-				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 				<div class="form-group">
 					<label for="id">ID</label>
 					<input type="text" id="id" name="id" class="form-control" placeholder="Enter ID">
@@ -37,7 +36,7 @@ $(document).ready(function(){
 				</div>
 				<div class="form-group">
 					<label for="password">Password</label>
-					<input type="password" id="password" name="password" class="form-control" placeholder="Password">
+					<input type="text" id="de" name="de" class="form-control" placeholder="Enter DESCRIPTION">
 				</div>
 				<div class="form-check">
 					<input type="checkbox" class="form-check-input" id="exampleCheck1">

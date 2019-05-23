@@ -11,14 +11,18 @@
 		http://www.springframework.org/schema/context/spring-context.xsd
 		">
     
-    <context:property-placeholder location="classpath:/spring/database.properties.local.mariadb"/>
+    <!--context:property-placeholder location="classpath:/spring/database.properties.local.mariadb"/-->
     
 	<!-- DB mariadb -->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
-        <property name="driverClassName" value="${db.driverClassName}"></property>
+        <!--property name="driverClassName" value="${db.driverClassName}"></property>
         <property name="url" value="${db.url}"></property>
         <property name="username" value="${db.username}"></property>
-        <property name="password" value="${db.password}"></property>
+        <property name="password" value="${db.password}"></property-->
+        <property name="driverClassName" value="#{testVaultDao.getDriverClassName()}"></property>
+        <property name="url" value="#{testVaultDao.getUrl()}"></property>
+        <property name="username" value="#{testVaultDao.getUsername()}"></property>
+        <property name="password" value="#{testVaultDao.getPassword()}"></property>
         <property name="maxActive" value="5" />
         <property name="testWhileIdle" value="true" />
         <property name="timeBetweenEvictionRunsMillis" value="5000" />
