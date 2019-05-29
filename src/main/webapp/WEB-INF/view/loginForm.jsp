@@ -5,7 +5,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>OAuth2.0 TEST PAGE</title>
-	<jsp:include page="/WEB-INF/common/common.jsp"/>
+	<jsp:include page="/WEB-INF/common/commonFirst.jsp"/>
 	<script type="text/javascript">
 $(document).ready(function(){
 	pageInit();

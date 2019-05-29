@@ -23,13 +23,15 @@ import org.springframework.vault.core.VaultTemplate;
 import org.springframework.vault.support.VaultResponseSupport;
 import org.springframework.web.context.ContextLoader;
 
+import dao.TestDataDao;
 import service.TestLoginService;
+import vo.TestDataVo;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(
 	locations = {
-    "classpath:spring/application-config.xml"
-	,"classpath:spring/database-config.xml"
+	    "classpath:spring/application-config.xml"
+		,"classpath:spring/database-config.xml"
     //"classpath:spring/mvc-config.xml"
 })
 //WebAppConfiguration
@@ -37,6 +39,8 @@ public class MainAppTest {
 	public static Logger logger = LoggerFactory.getLogger(MainAppTest.class);
 	@Autowired
 	private TestLoginService loginService;
+	@Autowired
+	private TestDataDao testDataDao;
 	
 	@Test
 	public void simpleTest() {
@@ -71,6 +75,10 @@ public class MainAppTest {
         this.logger.debug("from vault : username[{}] password[{}]", response.getData().getUsername(), response.getData().getPassword());
 
         vaultTemplate.delete("secret/myapp");
+        
+        
+        
+        
         assertThat(true, is(true));
 	}
 	
@@ -95,5 +103,16 @@ public class MainAppTest {
 			this.password = password;
 		}
 		
+	}
+	
+	@Test
+	public void loadTestData() {
+		final int dataCnt = 100;
+		TestDataVo testDataVo = testDataDao.selectOne(new TestDataVo("TEST_DATA_ID_0", "TEST_DATA_DE_0"));
+		if(testDataVo == null || testDataVo.getId() == null) {
+			for(int i=0; i<dataCnt; i++) {
+				int result = testDataDao.insert(new TestDataVo("TEST_DATA_ID_"+i, "TEST_DATA_DE_"+i));
+			}
+		}
 	}
 }//END OF CLASS

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<footer th:fragment="footerFragment">
+	<span>THIS IS LAYOUT FOOTER</span>
+	<!--span>Place sticky footer content here. Footer영역입니다.</span-->
+	<script th:attr="src=@{/resources/bootstrap/js/bootstrap.min.js}"></script>
+	<!-- Menu Toggle Script -->
+	<script>
+		$("#menu-toggle").click(function(e) {
+			e.preventDefault();
+			$("#wrapper").toggleClass("toggled");
+		});
+	</script>
+</footer>
+
+</html>
+
+

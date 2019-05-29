@@ -14,7 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import vo.TestUser;
+import vo.TestUserVo;
 
 @Service("testLoginService")
 public class TestLoginService implements UserDetailsService {
@@ -26,10 +26,10 @@ public class TestLoginService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		logger.debug("USER CHECK");
-		TestUser param = new TestUser();
+		TestUserVo param = new TestUserVo();
 		param.setUsername(username);
 		
-		TestUser result = sqlSessionTemplate.selectOne("testUser.get", param);
+		TestUserVo result = sqlSessionTemplate.selectOne("testUser.get", param);
 		if(result == null) {
 			throw new UsernameNotFoundException("TEMPLATE USERNAME NOT FOUND MESSAGE");
 		}

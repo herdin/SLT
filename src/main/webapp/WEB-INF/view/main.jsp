@@ -5,7 +5,7 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Welcome</title>
-		<jsp:include page="/WEB-INF/common/common.jsp"/>
+		<jsp:include page="/WEB-INF/common/commonFirst.jsp"/>
 	</head> 
 	<body>
 		LOGIN OK

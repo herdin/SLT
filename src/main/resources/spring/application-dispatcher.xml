@@ -16,12 +16,59 @@
     <context:component-scan base-package="controller"/>
     <mvc:resources mapping="/resources/**" location="/resources/" />
     <mvc:annotation-driven />
-
-	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-	        <!-- Example: a logical view name of 'showMessage' is mapped to '/WEB-INF/jsp/showMessage.jsp' -->
+	
+	<!-- default view resolver -->
+	<!--bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 	        <property name="prefix" value="/WEB-INF/view/"/>
 	        <property name="suffix" value=".jsp"/>
+	</bean-->
+	
+	<!-- thymeleaf view resolver 3>
+	<bean id="templateResolver" class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
+		<property name="prefix" value="/WEB-INF/thymeleaf/" />
+		<property name="suffix" value=".html" />
+		<property name="templateMode" value="HTML5" />
+		<property name="cacheable" value="false" />
 	</bean>
+ 	
+	<bean id="templateEngine" class="org.thymeleaf.spring3.SpringTemplateEngine">
+		<property name="templateResolver" ref="templateResolver" />
+	</bean>
+	
+	<bean class="org.thymeleaf.spring3.view.ThymeleafViewResolver">
+		<property name="characterEncoding" value="UTF-8" />
+		<property name="templateEngine" ref="templateEngine" />
+	</bean-->
+	
+    <!-- Thymeleaf View Resolver - implementation of Spring's ViewResolver interface -->
+    <bean id="viewResolver" class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
+        <property name="templateEngine" ref="templateEngine" />
+        <property name="characterEncoding" value="UTF-8" />
+    </bean>
+    
+    <!-- Thymeleaf Template Engine (Spring4-specific version) -->
+    <bean id="templateEngine" class="org.thymeleaf.spring4.SpringTemplateEngine">
+		<property name="templateResolver" ref="templateResolver" />
+		<property name="additionalDialects">
+		    <set>
+		        <bean class="nz.net.ultraq.thymeleaf.LayoutDialect"/>
+		    </set>
+		</property>
+    </bean>
+    
+    <!-- Thymeleaf Template Resolver -->
+    <bean id="templateResolver" class="org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver">
+        <property name="prefix" value="/WEB-INF/thymeleaf/" />
+		<property name="suffix" value=".html" />
+		<property name="templateMode" value="HTML5" />
+    </bean>
+	
+	<!-- default locale resolver : AceeptHeaderLocaleResolver -->
+	<!-- for multilingual : set locale from session -->
+	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+		<property name="defaultLocale" value="ko" />
+	</bean>
+	
 	<mvc:interceptors>
 		<bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
 			<property name="paramName" value="lang" />

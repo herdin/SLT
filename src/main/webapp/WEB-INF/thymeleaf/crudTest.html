@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/commonLayout}">
+<head>
+<title>Page Title</title>
+</head>
+<body>
+<section layout:fragment="content">
+<script>
+$( document ).ready(function() {
+    console.log( "ready! from content" );
+    
+    var loadData = {};
+    
+	$('#list').click(function() {
+		console.log('clicked list button');
+		
+		$("#jsGrid").jsGrid("loadData").done(function(){
+			console.log("jsGrid data loaded");
+		});
+		
+		/*
+		$.ajax({
+			url: location.pathname + 'list',
+			data: {
+				id: $('#id').val()
+				,de: $('#de').val()
+			},
+			type: "GET",
+			dataType: "json",
+			success: function(data) {
+				console.log('clicked list button ajax call success');
+				console.dir(data);
+				loadData = {
+					data: data,
+					itemsCount: data.length
+				};
+			}
+		});
+		*/
+	});
+	
+ 	var idField = 'id';//'IDentification';
+ 	var deField = 'de';//'DEscription';
+	var jsGridController = {
+		loadData: function(obj) {
+			console.log('jsGrid loadData');
+			console.dir(obj);
+			return $.ajax({
+				url: location.pathname + 'list',
+				data: {
+					id: $('#id').val()
+					,de: $('#de').val()
+				},
+				type: "GET",
+				dataType: "json",
+				success: function(data) {
+					console.log('clicked list button ajax call success');
+					console.dir(data);
+					loadData = {
+						data: data,
+						itemsCount: data.length
+					};
+				}
+			});
+			//{ data: [items], itemsCount: [total items count] }
+		},
+		insertItem: function(obj) {
+			console.log('jsGrid insertItem');
+			console.dir(obj);
+		},
+		updateItem: function(obj) {
+			console.log('jsGrid updateItem');
+			console.dir(obj);
+		},
+		deleteItem: function(obj) {
+			console.log('jsGrid deleteItem');
+			console.dir(obj);
+		}
+	}
+	
+	$("#jsGrid").jsGrid({
+		width: "100%",
+		height: "400px",
+		inserting: true,
+		editing: true,
+		sorting: true,
+		paging: true,
+		controller: jsGridController,
+		rowClick: function(obj) {
+			console.log('jsGrid rowClick');
+			console.dir(obj.item);
+			console.dir(obj.itemIndex);
+			console.dir(obj.event);
+		},
+		data: [],
+		fields: [
+			{ name: idField, type: "text", width: 100, validate: "required" },
+			{ name: deField, type: "text", width: 100, validate: "required" },
+			{ type: "control" }
+		]
+	});
+	/*$("#get_data").click(function () {
+		var items = $("#jsGrid").jsGrid("option", "data");
+		console.log('row clicked');
+		console.dir(items);
+	});*/
+});
+
+
+/*
+var insert_item = {};
+//데이터를 추가를 위해서 json object 생성
+insert_item.Name = $("#Name").val();
+insert_item.Age = parseInt($("#Age").val());
+insert_item.Address = $("#Address").val();
+insert_item.Country = $("#Country").val();
+insert_item.Married = $('#Married').is(":checked") ? true : false;
+//grid에 넣을 데이터를 object의 만들기
+$("#jsGrid").jsGrid("insertItem", insert_item);
+ */
+</script>
+	<p>crud test Content</p>
+	<form>
+		<div class="form-row">
+			<div class="form-group col-md-4">
+				<input type="text" id="id" name="id" class="form-control" placeholder="ID">
+			</div>
+			<div class="form-group col-md-4">
+				<input type="text" id="de" name="de" class="form-control" placeholder="DE">
+			</div>
+			<div class="form-group col-md-4">
+				<button type="button" id="list" class="btn btn-primary">List</button>
+			</div>
+		</div>
+	</form>
+	<div id="jsGrid"></div>
+</section>
+</body>
+</html>

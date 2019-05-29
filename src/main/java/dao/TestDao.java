@@ -7,9 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
-import vo.TestVO;
-
-@Component
+@Repository
 public class TestDao {
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -17,7 +15,7 @@ public class TestDao {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 	
-	public TestVO testDao() {
+	public String getTime() {
 		return sqlSessionTemplate.selectOne("testUser.getTime");
 	}//END OF FUNCTION
 	

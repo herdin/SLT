@@ -9,7 +9,7 @@
 	</settings> 
 	
 	<typeAliases>
-		<typeAlias alias="TestVO" type="vo.TestVO"></typeAlias>
-		<typeAlias alias="TestUser" type="vo.TestUser"></typeAlias>
+		<typeAlias alias="TestDataVo" type="vo.TestDataVo"></typeAlias>
+		<typeAlias alias="TestUserVo" type="vo.TestUserVo"></typeAlias>
 	</typeAliases>
 </configuration>

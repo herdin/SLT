@@ -4,10 +4,10 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
    
 <mapper namespace="testUser">
-	<select id="getTime" resultType="TestVO">
+	<select id="getTime" resultType="String">
 		SELECT DATE_FORMAT(NOW(), '%Y%m%d%H%i%s') AS CURRENT_DATETIME
 	</select>
-	<select id="get" resultType="TestUser" parameterType="TestUser">
+	<select id="get" resultType="TestUserVo" parameterType="TestUserVo">
 		SELECT
 			USERNAME
 			,PASSWORD

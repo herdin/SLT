@@ -9,11 +9,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import org.springframework.vault.authentication.TokenAuthentication;
 import org.springframework.vault.client.VaultEndpoint;
 import org.springframework.vault.core.VaultTemplate;
 
-@Component
+@Repository
 public class TestVaultDao {
 	private Logger logger = LoggerFactory.getLogger(TestVaultDao.class);
 	@Value("#{applicationProperties['vault.url']}")
