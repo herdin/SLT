@@ -12,18 +12,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.Environment;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.vault.annotation.VaultPropertySource;
 import org.springframework.vault.authentication.TokenAuthentication;
 import org.springframework.vault.client.VaultEndpoint;
 import org.springframework.vault.core.VaultTemplate;
 import org.springframework.vault.support.VaultResponseSupport;
-import org.springframework.web.context.ContextLoader;
 
 import dao.TestDataDao;
+import dao.TestVaultDao;
 import service.TestLoginService;
 import vo.TestDataVo;
 
@@ -50,60 +47,35 @@ public class MainAppTest {
 		assertThat(this.loginService.getClass().getSimpleName(), is("TestLoginService"));
 	}
 	
-//	@Value("#{vault.token}") - fail with @PropertySource("classpath:spring/application.properties")
-//	@Value("#{systemProperties['vault.token']}") - fail with @PropertySource("classpath:spring/application.properties")
 	@Value("#{applicationProperties['vault.url']}")
 	private String vaultUrl;
 	@Value("#{applicationProperties['vault.token']}")
 	private String vaultToken;
+	@Value("#{applicationProperties['vault.databae.path']}")
+	private String vaultPath;
 		
 	@Test
 	public void vaultTest() throws URISyntaxException {
-		this.logger.debug("properties vault token [{}]", this.vaultToken);
+		this.logger.debug("properties vaultUrl[{}] vaultToken[{}] vaultPath[{}]", this.vaultUrl, this.vaultToken, this.vaultPath);
 		
 		VaultTemplate vaultTemplate = new VaultTemplate(
 			VaultEndpoint.from(new URI(this.vaultUrl))
 			, new TokenAuthentication(this.vaultToken)
 		);
 		
-		Secrets secrets = new Secrets("testunit-hello", "testunit-world:" + this.hashCode());
-        this.logger.debug("to   vault : username[{}] password[{}]", secrets.getUsername(), secrets.getPassword());
+//		Secrets secrets = new Secrets("testunit-hello", "testunit-world:" + this.hashCode());
+//        this.logger.debug("to   vault : username[{}] password[{}]", secrets.getUsername(), secrets.getPassword());
+//
+//        vaultTemplate.write("secret/myapp", secrets);
 
-        vaultTemplate.write("secret/myapp", secrets);
-
-        VaultResponseSupport<Secrets> response = vaultTemplate.read("secret/myapp", MainAppTest.Secrets.class);
+        VaultResponseSupport<TestVaultDao.KvDatabase> response = vaultTemplate.read(this.vaultPath, TestVaultDao.KvDatabase.class);
         this.logger.debug("from vault : username[{}] password[{}]", response.getData().getUsername(), response.getData().getPassword());
 
-        vaultTemplate.delete("secret/myapp");
-        
-        
-        
+//        vaultTemplate.delete("secret/myapp");
         
         assertThat(true, is(true));
 	}
 	
-	static class Secrets {
-		private String username;
-		private String password;
-		public Secrets() {}
-		public Secrets(String username, String password) {
-			this.username = username;
-			this.password = password;
-		}
-		public String getUsername() {
-			return username;
-		}
-		public String getPassword() {
-			return password;
-		}
-		public void setUsername(String username) {
-			this.username = username;
-		}
-		public void setPassword(String password) {
-			this.password = password;
-		}
-		
-	}
 	
 	@Test
 	public void loadTestData() {

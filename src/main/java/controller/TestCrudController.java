@@ -23,7 +23,7 @@ import vo.TestDataVo;
 @RequestMapping(value="/noauth/crud")
 public class TestCrudController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(TestCrudController.class);
+	private final Logger logger = LoggerFactory.getLogger(TestCrudController.class);
 	
 	@Autowired
 	private TestCrudService testCrudService;
@@ -55,24 +55,21 @@ public class TestCrudController {
 	}//END OF FUNCTION
 	
 	@RequestMapping(value="/add")
-	public ModelAndView add(@RequestParam Map<String,Object> map, HttpServletRequest request) {
-		ModelAndView mav = new ModelAndView("showMessage");
-		mav.addObject("message", testCrudService.testService());
-		return mav;
+	public @ResponseBody int add(TestDataVo testDataVo) {
+		this.logger.debug("recv vo : " + testDataVo);
+		return this.testCrudService.addTestData(testDataVo);
 	}//END OF FUNCTION
 	
 	@RequestMapping(value="/del")
-	public ModelAndView del(@RequestParam Map<String,Object> map, HttpServletRequest request) {
-		ModelAndView mav = new ModelAndView("showMessage");
-		mav.addObject("message", testCrudService.testService());
-		return mav;
+	public @ResponseBody int del(TestDataVo testDataVo) {
+		this.logger.debug("recv vo : " + testDataVo);
+		return this.testCrudService.deleteTestData(testDataVo);
 	}//END OF FUNCTION
 	
 	@RequestMapping(value="/mod")
-	public ModelAndView mod(@RequestParam Map<String,Object> map, HttpServletRequest request) {
-		ModelAndView mav = new ModelAndView("showMessage");
-		mav.addObject("message", testCrudService.testService());
-		return mav;
+	public @ResponseBody int mod(TestDataVo testDataVo) {
+		this.logger.debug("recv vo : " + testDataVo);
+		return this.testCrudService.updateTestData(testDataVo);
 	}//END OF FUNCTION
 	
 }//END OF CLASS

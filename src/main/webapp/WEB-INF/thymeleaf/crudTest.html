@@ -11,81 +11,117 @@
 $( document ).ready(function() {
     console.log( "ready! from content" );
     
-    var loadData = {};
-    
 	$('#list').click(function() {
 		console.log('clicked list button');
 		
 		$("#jsGrid").jsGrid("loadData").done(function(){
 			console.log("jsGrid data loaded");
 		});
-		
-		/*
-		$.ajax({
-			url: location.pathname + 'list',
-			data: {
-				id: $('#id').val()
-				,de: $('#de').val()
-			},
-			type: "GET",
-			dataType: "json",
-			success: function(data) {
-				console.log('clicked list button ajax call success');
-				console.dir(data);
-				loadData = {
-					data: data,
-					itemsCount: data.length
-				};
-			}
-		});
-		*/
 	});
 	
  	var idField = 'id';//'IDentification';
  	var deField = 'de';//'DEscription';
 	var jsGridController = {
-		loadData: function(obj) {
+		loadData: function(filterObj) {
 			console.log('jsGrid loadData');
-			console.dir(obj);
-			return $.ajax({
+			console.dir(filterObj);
+			return new Promise(function(resolve, reject){
+				$.ajax({
+					url: location.pathname + 'list',
+					data: filterObj,
+					type: "GET",
+					dataType: "json",
+					success: function(obj) {
+						console.log('success');
+						console.dir(obj);
+						resolve(obj);
+					},
+					error: function(obj) {
+						console.log('error');
+						console.dir(obj);
+						reject(obj);
+					}
+				});
+			});
+			/*return $.ajax({
 				url: location.pathname + 'list',
-				data: {
-					id: $('#id').val()
-					,de: $('#de').val()
-				},
+				data: filterObj,
 				type: "GET",
 				dataType: "json",
-				success: function(data) {
-					console.log('clicked list button ajax call success');
-					console.dir(data);
-					loadData = {
-						data: data,
-						itemsCount: data.length
-					};
+				success: function(obj) {
+					console.log('success');
+					console.dir(obj);
+				},
+				error: function(obj) {
+					console.log('error');
+					console.dir(obj);
+				}
+			});*/
+		},
+		insertItem: function(insertObj) {
+			console.log('jsGrid insertItem');
+			console.dir(insertObj);
+			$.ajax({
+				url: location.pathname + 'add',
+				data: insertObj,
+				type: "GET",
+				dataType: "json",
+				success: function(obj) {
+					console.log('success');
+					console.dir(obj);
+				},
+				error: function(obj) {
+					console.log('error');
+					console.dir(obj);
 				}
 			});
-			//{ data: [items], itemsCount: [total items count] }
 		},
-		insertItem: function(obj) {
-			console.log('jsGrid insertItem');
-			console.dir(obj);
-		},
-		updateItem: function(obj) {
+		updateItem: function(updateObj) {
 			console.log('jsGrid updateItem');
-			console.dir(obj);
+			console.dir(updateObj);
+			$.ajax({
+				url: location.pathname + 'mod',
+				data: updateObj,
+				type: "GET",
+				dataType: "json",
+				success: function(obj) {
+					console.log('success');
+					console.dir(obj);
+				},
+				error: function(obj) {
+					console.log('error');
+					console.dir(obj);
+				}
+			});
 		},
-		deleteItem: function(obj) {
+		deleteItem: function(deleteObj) {
 			console.log('jsGrid deleteItem');
-			console.dir(obj);
+			console.dir(deleteObj);
+			$.ajax({
+				url: location.pathname + 'del',
+				data: deleteObj,
+				type: "GET",
+				dataType: "json",
+				success: function(obj) {
+					console.log('success');
+					console.dir(obj);
+				},
+				error: function(obj) {
+					console.log('error');
+					console.dir(obj);
+				}
+			});
 		}
 	}
 	
 	$("#jsGrid").jsGrid({
 		width: "100%",
 		height: "400px",
+		autoload: true,
 		inserting: true,
 		editing: true,
 		sorting: true,
+		filtering: true,
 		paging: true,
 		controller: jsGridController,
 		rowClick: function(obj) {
@@ -101,40 +137,9 @@ $( document ).ready(function() {
 			{ type: "control" }
 		]
 	});
-	/*$("#get_data").click(function () {
-		var items = $("#jsGrid").jsGrid("option", "data");
-		console.log('row clicked');
-		console.dir(items);
-	});*/
 });
-
-
-/*
-var insert_item = {};
-//데이터를 추가를 위해서 json object 생성
-insert_item.Name = $("#Name").val();
-insert_item.Age = parseInt($("#Age").val());
-insert_item.Address = $("#Address").val();
-insert_item.Country = $("#Country").val();
-insert_item.Married = $('#Married').is(":checked") ? true : false;
-//grid에 넣을 데이터를 object의 만들기
-$("#jsGrid").jsGrid("insertItem", insert_item);
- */
 </script>
-	<p>crud test Content</p>
-	<form>
-		<div class="form-row">
-			<div class="form-group col-md-4">
-				<input type="text" id="id" name="id" class="form-control" placeholder="ID">
-			</div>
-			<div class="form-group col-md-4">
-				<input type="text" id="de" name="de" class="form-control" placeholder="DE">
-			</div>
-			<div class="form-group col-md-4">
-				<button type="button" id="list" class="btn btn-primary">List</button>
-			</div>
-		</div>
-	</form>
+	<h3><span th:text="${message}">Crud test Content</span><span class="badge badge-dark">Now</span></h3>
 	<div id="jsGrid"></div>
 </section>
 </body>

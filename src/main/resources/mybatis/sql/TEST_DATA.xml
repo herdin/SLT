@@ -22,7 +22,10 @@
 		FROM TEST_DATA
 		WHERE 1=1
 		<if test="id != null and id != ''">
-			AND ID like #{id}
+			AND ID like CONCAT('%', #{id}, '%')
+		</if>
+		<if test="de != null and de != ''">
+			AND DE like CONCAT('%', #{de}, '%')
 		</if>
 	</select>
 	

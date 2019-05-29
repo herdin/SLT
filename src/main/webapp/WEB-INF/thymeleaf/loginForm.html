@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/commonLayout}">
+<head><meta charset="utf-8"></head>
+<body>
+<section layout:fragment="content">
+	<script type="text/javascript">
+$(document).ready(function(){
+	pageInit();
+	function pageInit() {
+		var errorMessage = $('#errorMessage').html();
+		if(errorMessage != null && errorMessage != undefined && errorMessage != "") {
+			$('#errorMessage').html(errorMessage);
+			$('#errorMessage').show();
+		}
+		var logoutMessage = $('#logoutMessage').html();
+		if(logoutMessage != null && logoutMessage != undefined && logoutMessage != "") {
+			$('#logoutMessage').html(logoutMessage);
+			$('#logoutMessage').show();
+		}
+	}
+});
+	</script>
+	<style>
+.alert, form {
+	margin-top: 10px;
+}
+	</style>
+	<!--c:url var="loginProcess" value="j_spring_security_check"/-->
+	<!-- j_spring_security_check -->
+	<form action="login" method="post" accept-charset="UTF-8">
+		<input type="hidden" name="DEFAULT_PARAMETER_NAME" value="DEFAULT_TOKEN" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+		<div class="form-row">
+			<div class="form-group col-md-4">
+				<input type="text" id="id" name="id" class="form-control" placeholder="Enter ID">
+			</div>
+			<div class="form-group col-md-4">
+				<input type="password" id="password" name="password" class="form-control" placeholder="Password">
+			</div>
+		</div>
+		<button type="submit" class="btn btn-primary">Submit</button>
+	</form>
+	<div id="errorMessage" class="alert alert-danger" role="alert" style="display: none;" th:text="${errorMessage}"></div>
+	<div id="logoutMessage" class="alert alert-primary" role="alert" style="display: none;" th:text="${logoutMessage}"></div>
+</section>
+</body>
+</html>
