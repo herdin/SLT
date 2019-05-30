@@ -33,7 +33,7 @@ import vo.TestDataVo;
 })
 //WebAppConfiguration
 public class MainAppTest {
-	public static Logger logger = LoggerFactory.getLogger(MainAppTest.class);
+	private Logger logger = LoggerFactory.getLogger(MainAppTest.class);
 	@Autowired
 	private TestLoginService loginService;
 	@Autowired
@@ -83,7 +83,10 @@ public class MainAppTest {
 		TestDataVo testDataVo = testDataDao.selectOne(new TestDataVo("TEST_DATA_ID_0", "TEST_DATA_DE_0"));
 		if(testDataVo == null || testDataVo.getId() == null) {
 			for(int i=0; i<dataCnt; i++) {
-				int result = testDataDao.insert(new TestDataVo("TEST_DATA_ID_"+i, "TEST_DATA_DE_"+i));
+				if(testDataDao.insert(new TestDataVo("TEST_DATA_ID_"+i, "TEST_DATA_DE_"+i)) <= 0) {
+					throw new RuntimeException("");
+				}
+				
 			}
 		}
 	}
