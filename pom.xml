@@ -29,22 +29,51 @@
 		<jsp.version>2.2</jsp.version>
 		<jstl.version>1.2</jstl.version>
 		
-		<!-- thymeleaf -->
+		<!-- Spring Security -->
+		<!-- https://docs.spring.io/spring-security/site/docs/3.2.5.RELEASE/reference/htmlsingle/#jc-form -->
+		<spring-security.version>4.2.12.RELEASE</spring-security.version>
+		
+		<!-- Spring Vault -->
+		<!-- https://www.vaultproject.io/ -->
+		<!-- https://spring.io/projects/spring-vault -->
+		<spring-vault.version>2.1.2.RELEASE</spring-vault.version>
+		
+		<!-- MYBATIS -->
+		<mybatis.version>3.2.2</mybatis.version>
+		<mybatis-spring.version>1.2.0</mybatis-spring.version>
+		
+		<!-- DBCP -->
+		<commons-dbcp.version>1.4</commons-dbcp.version>
+		
+		<!-- MARIA DB -->
+		<mariadb-jdbc.version>1.1.7</mariadb-jdbc.version>
+		
+		<!-- MONGO DB -->
+		<!-- mongodb-driver version compatibility 
+		https://docs.mongodb.com/ecosystem/drivers/driver-compatibility-reference/#reference-compatibility-mongodb-java -->
+		<mongo-jdbc.version>3.8.2</mongo-jdbc.version>
+		<spring-data-mongodb.version>1.9.1.RELEASE</spring-data-mongodb.version>
+		
+		<!-- NETTY -->
+		<!-- https://mvnrepository.com/artifact/io.netty/netty-all -->
+		<netty-all.version>4.1.32.Final</netty-all.version>
+		
+		<!-- Logging with SLF4J & LogBack -->
+		<slf4j.version>1.7.26</slf4j.version>
+		<logback.version>1.2.3</logback.version>
+		<!-- java commonn logger over slf4j -->
+		<jcloverslf4j.version>1.7.6</jcloverslf4j.version>
+		
+		<!-- Test Artifacts -->
+		<junit.version>4.12</junit.version>
+		
+		<!-- Thymeleaf -->
 		<!-- https://www.thymeleaf.org/documentation.html -->
 		<thymeleaf.version>3.0.11.RELEASE</thymeleaf.version>
 		<thymeleaf.layout-dialect.version>2.3.0</thymeleaf.layout-dialect.version>
 		
-		<!-- Spring Security -->
-		<spring-security.version>4.2.12.RELEASE</spring-security.version>
-		
-		<!-- Logging -->
-		<slf4j.version>1.7.26</slf4j.version>
-		<logback.version>1.2.3</logback.version>
-		<jcloverslf4j.version>1.7.6</jcloverslf4j.version>
-		
-		<!-- Test -->
-		<junit.version>4.12</junit.version>
-		
+		<!-- jsGrid -->
+		<!-- http://js-grid.com/ -->
 	</properties>
 	
 	<dependencies>
@@ -81,131 +110,6 @@
 			<version>${jstl.version}</version>
 		</dependency>
 		
-		<!-- thymeleaf -->
-		<!-- old : thymeleaf-spring3 -->
-		<dependency>
-			<groupId>org.thymeleaf</groupId>
-			<artifactId>thymeleaf-spring4</artifactId>
-			<version>${thymeleaf.version}</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.thymeleaf</groupId>
-			<artifactId>thymeleaf</artifactId>
-			<version>${thymeleaf.version}</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>nz.net.ultraq.thymeleaf</groupId>
-			<artifactId>thymeleaf-layout-dialect</artifactId>
-			<version>${thymeleaf.layout-dialect.version}</version>
-		</dependency>
-		
-		<!-- Logging with SLF4J & LogBack -->
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>${slf4j.version}</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-			<version>${logback.version}</version>
-			<scope>runtime</scope>
-		</dependency>
-		<!-- java commonn logger over slf4j -->
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>jcl-over-slf4j</artifactId>
-			<version>${jcloverslf4j.version}</version>
-		</dependency>
-			
-		<!-- Test Artifacts -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>
-			<version>${spring-framework.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>${junit.version}</version>
-			<scope>test</scope>
-		</dependency>
-
-		<!-- MYBATIS -->		
-		<dependency>
-		    <groupId>org.mybatis</groupId>
-		    <artifactId>mybatis</artifactId>
-		    <version>3.2.2</version>
-		</dependency>
-		<dependency>
-		    <groupId>org.mybatis</groupId>
-		    <artifactId>mybatis-spring</artifactId>
-		    <version>1.2.0</version>
-		</dependency>
-		<dependency>
-		    <groupId>org.springframework</groupId>
-		    <artifactId>spring-jdbc</artifactId>
-		    <version>${spring-framework.version}</version>
-		</dependency>
-		
-		<!-- Spring Transactions -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-tx</artifactId>
-			<version>${spring-framework.version}</version>
-			<scope>compile</scope>
-		</dependency>
-		
-		<!-- DBCP --> 
-		<dependency>
-		    <groupId>commons-dbcp</groupId>
-		    <artifactId>commons-dbcp</artifactId>
-		    <version>1.4</version>
-		</dependency>
-		
-		<!-- MARIA DB -->
-		<dependency>
-		    <groupId>org.mariadb.jdbc</groupId>
-		    <artifactId>mariadb-java-client</artifactId>
-		    <version>1.1.7</version>
-		</dependency>
-		
-		<!-- MONGO DB -->
-		<!--
-		mongodb-driver version compatibility 
-		https://docs.mongodb.com/ecosystem/drivers/driver-compatibility-reference/#reference-compatibility-mongodb-java
-		>
-	    <dependency>
-	        <groupId>org.mongodb</groupId>
-	        <artifactId>mongo-java-driver</artifactId>
-	        <version>3.8.2</version>
-	    </dependency>
-	    <dependency>
-	        <groupId>org.springframework.data</groupId>
-	        <artifactId>spring-data-mongodb</artifactId>
-	        <version>1.9.1.RELEASE</version>
-	    </dependency-->
-	    
-	    <!-- DELETE : Spring 4 already got -->
-	    <!-- JACKSON : JASON TO OBEJCT >
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-			<version>2.9.8</version>
-		</dependency-->
-		
-		<!-- NETTY -->
-		<!-- https://mvnrepository.com/artifact/io.netty/netty-all -->
-		<dependency>
-		    <groupId>io.netty</groupId>
-		    <artifactId>netty-all</artifactId>
-		    <version>4.1.32.Final</version>
-		</dependency>
-		
 		<!-- Spring Security -->
 		<dependency>
 		    <groupId>org.springframework.security</groupId>
@@ -240,9 +144,133 @@
 		<dependency>
 			<groupId>org.springframework.vault</groupId>
 			<artifactId>spring-vault-core</artifactId>
-			<version>2.1.2.RELEASE</version>
+			<version>${spring-vault.version}</version>
+		</dependency>
+		
+		<!-- MYBATIS -->		
+		<dependency>
+		    <groupId>org.mybatis</groupId>
+		    <artifactId>mybatis</artifactId>
+		    <version>${mybatis.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.mybatis</groupId>
+		    <artifactId>mybatis-spring</artifactId>
+		    <version>${mybatis-spring.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-jdbc</artifactId>
+		    <version>${spring-framework.version}</version>
+		</dependency>
+		
+		<!-- Spring Transactions -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${spring-framework.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		
+		<!-- DBCP --> 
+		<dependency>
+		    <groupId>commons-dbcp</groupId>
+		    <artifactId>commons-dbcp</artifactId>
+		    <version>${commons-dbcp.version}</version>
+		</dependency>
+		
+		<!-- MARIA DB -->
+		<dependency>
+		    <groupId>org.mariadb.jdbc</groupId>
+		    <artifactId>mariadb-java-client</artifactId>
+		    <version>${mariadb-jdbc.version}</version>
+		</dependency>
+		
+		<!-- MONGO DB -->
+		<!--
+		mongodb-driver version compatibility 
+		https://docs.mongodb.com/ecosystem/drivers/driver-compatibility-reference/#reference-compatibility-mongodb-java
+		>
+	    <dependency>
+	        <groupId>org.mongodb</groupId>
+	        <artifactId>mongo-java-driver</artifactId>
+	        <version>${mongo-jdbc.version}</version>
+	    </dependency>
+	    <dependency>
+	        <groupId>org.springframework.data</groupId>
+	        <artifactId>spring-data-mongodb</artifactId>
+	        <version>${spring-data-mongodb.version}</version>
+	    </dependency-->
+	    
+		<!-- NETTY -->
+		<dependency>
+		    <groupId>io.netty</groupId>
+		    <artifactId>netty-all</artifactId>
+		    <version>${netty-all.version}</version>
+		</dependency>
+		
+		
+		<!-- Logging with SLF4J & LogBack -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${logback.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<!-- java commonn logger over slf4j -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>${jcloverslf4j.version}</version>
+		</dependency>
+		
+		<!-- Test Artifacts -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring-framework.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<!-- Thymeleaf -->
+		<!-- old : thymeleaf-spring3 -->
+		<dependency>
+			<groupId>org.thymeleaf</groupId>
+			<artifactId>thymeleaf-spring4</artifactId>
+			<version>${thymeleaf.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.thymeleaf</groupId>
+			<artifactId>thymeleaf</artifactId>
+			<version>${thymeleaf.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>nz.net.ultraq.thymeleaf</groupId>
+			<artifactId>thymeleaf-layout-dialect</artifactId>
+			<version>${thymeleaf.layout-dialect.version}</version>
 		</dependency>
 
+	    <!-- DELETE : Spring 4 already got -->
+	    <!-- JACKSON : JASON TO OBEJCT >
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.9.8</version>
+		</dependency-->
 	</dependencies>
 	
     <build>

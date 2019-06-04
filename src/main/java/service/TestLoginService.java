@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import config.SecurityConfig.ROLE;
 import vo.TestUserVo;
 
 @Service("testLoginService")
@@ -35,7 +36,7 @@ public class TestLoginService implements UserDetailsService {
 		}
 		
 		Collection<SimpleGrantedAuthority> authorities = new ArrayList<>(); 
-		authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+		authorities.add(new SimpleGrantedAuthority(ROLE.USER.getAuthString()));
 		
 		UserDetails user = new User(result.getUsername(), result.getPassword(), authorities);
 		return user;
