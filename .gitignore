@@ -4,6 +4,6 @@
 .settings/
 .springBeans
 .iml
-.ide/
+.idea/
 target/
 logs/
