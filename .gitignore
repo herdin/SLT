@@ -3,5 +3,7 @@
 .project
 .settings/
 .springBeans
+.iml
+.ide/
 target/
 logs/

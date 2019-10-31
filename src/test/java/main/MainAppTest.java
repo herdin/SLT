@@ -53,6 +53,9 @@ public class MainAppTest {
 	private String vaultToken;
 	@Value("#{applicationProperties['vault.databae.path']}")
 	private String vaultPath;
+
+	@Autowired
+	private TestVaultDao testVaultDao;
 		
 	@Test
 	public void vaultTest() throws URISyntaxException {
@@ -70,9 +73,10 @@ public class MainAppTest {
 
         VaultResponseSupport<TestVaultDao.KvDatabase> response = vaultTemplate.read(this.vaultPath, TestVaultDao.KvDatabase.class);
         this.logger.debug("from vault : username[{}] password[{}]", response.getData().getUsername(), response.getData().getPassword());
+		this.logger.debug("from vaultDao : {}", this.testVaultDao.getDriverClassName());
 
 //        vaultTemplate.delete("secret/myapp");
-        
+
         assertThat(true, is(true));
 	}
 	
