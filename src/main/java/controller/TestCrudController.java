@@ -37,7 +37,7 @@ public class TestCrudController {
 		logger.debug("url : {}" , new String(request.getRequestURL()));
 		
 		ModelAndView mav = new ModelAndView("crudTest");
-		mav.addObject("message", testCrudService.testService());
+		mav.addObject("message", testCrudService.testService() + "/" + request.getLocalAddr());
 		return mav;
 	}//END OF FUNCTION
 	
