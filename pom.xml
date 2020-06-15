@@ -31,7 +31,7 @@
 		
 		<!-- Spring Security -->
 		<!-- https://docs.spring.io/spring-security/site/docs/3.2.5.RELEASE/reference/htmlsingle/#jc-form -->
-		<spring-security.version>4.2.13.RELEASE</spring-security.version>
+		<spring-security.version>5.3.3.RELEASE</spring-security.version>
 		
 		<!-- Spring Vault -->
 		<!-- https://www.vaultproject.io/ -->
