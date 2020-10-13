@@ -65,7 +65,7 @@
 		<jcloverslf4j.version>1.7.6</jcloverslf4j.version>
 		
 		<!-- Test Artifacts -->
-		<junit.version>4.12</junit.version>
+		<junit.version>4.13.1</junit.version>
 		
 		<!-- Thymeleaf -->
 		<!-- https://www.thymeleaf.org/documentation.html -->
