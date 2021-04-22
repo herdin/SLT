@@ -39,7 +39,7 @@
 		<spring-vault.version>2.1.2.RELEASE</spring-vault.version>
 		
 		<!-- MYBATIS -->
-		<mybatis.version>3.2.2</mybatis.version>
+		<mybatis.version>3.5.6</mybatis.version>
 		<mybatis-spring.version>1.2.0</mybatis-spring.version>
 		
 		<!-- DBCP -->
