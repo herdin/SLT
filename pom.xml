@@ -22,7 +22,7 @@
 		<!-- Old : 4.3.16.RELEASE -->
 		<!-- Old : 4.3.23.RELEASE -->
 		<!-- 5.1.7.RELEASE for spring-vault -->
-		<spring-framework.version>5.1.7.RELEASE</spring-framework.version>
+		<spring-framework.version>5.3.18</spring-framework.version>
 		
 		<!-- Other Web dependencies -->
 		<servlet.version>2.5</servlet.version>
